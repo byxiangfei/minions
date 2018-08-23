@@ -5,8 +5,6 @@ import (
 	"runtime"
 	"sync/atomic"
 	"time"
-
-	"code.byted.org/gopkg/pkg/log"
 )
 
 const (
@@ -40,7 +38,6 @@ func (m *Minion) run() {
 			const size = 64 << 20
 			buf := make([]byte, size)
 			buf = buf[:runtime.Stack(buf, false)]
-			log.Error("worker=%d panic=%v\n%s\n", m.id, err, buf)
 		}
 		atomic.StoreInt32(&m.isStop, 1)
 	}()
